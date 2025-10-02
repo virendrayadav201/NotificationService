@@ -1,3 +1,5 @@
+using NotificationService.Infrastructure;
+
 namespace NotificationService.API
 {
     public class Program
@@ -5,7 +7,7 @@ namespace NotificationService.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            ServiceRegistration.RegisterService(builder.Services, builder.Configuration);
             // Add services to the container.
 
             builder.Services.AddControllers();

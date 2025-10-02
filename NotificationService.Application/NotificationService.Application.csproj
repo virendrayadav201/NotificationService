@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="Mappers\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="Services\Abstractions\" />
-    <Folder Include="Services\Implementations\" />
+    <PackageReference Include="AutoMapper" Version="15.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NotificationService.Domain\NotificationService.Domain.csproj" />
   </ItemGroup>
 
 </Project>
