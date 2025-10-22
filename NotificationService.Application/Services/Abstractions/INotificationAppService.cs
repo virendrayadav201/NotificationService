@@ -11,8 +11,8 @@ namespace NotificationService.Application.Services.Abstractions
     {
         NotificationDTO GetNotification(int id);
         List<NotificationDTO> GetNotifications(int userId);
-        bool DeleteNotification(int id);
-        bool InsertNotification(NotificationDTO notification);
-        bool UpdateNotification(NotificationDTO notification);
+        SaveResponse DeleteNotification(int id);
+        SaveResponse InsertNotification(NotificationDTO notification);
+        SaveResponse UpdateNotification(NotificationDTO notification);
     }
 }

@@ -15,7 +15,8 @@ namespace NotificationService.API.Controllers
             _notificationAppService= notificationAppService;   
         }
 
-        [HttpGet]
+        [HttpGet("{userId}")]
+        [ProducesDefaultResponseType(typeof(List<NotificationDTO>))]
         public IActionResult GetNotifications(int userId)
         {
             var result = _notificationAppService.GetNotifications(userId);
@@ -26,7 +27,8 @@ namespace NotificationService.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
+        [ProducesDefaultResponseType(typeof(NotificationDTO))]
         public IActionResult GetNotification(int id)
         {
             var result = _notificationAppService.GetNotification(id);
@@ -38,20 +40,27 @@ namespace NotificationService.API.Controllers
         }
 
         [HttpPost]
+        [ProducesDefaultResponseType(typeof(SaveResponse))]
         public IActionResult InsertNotification([FromBody]NotificationDTO notification)
         {
            var result = _notificationAppService.InsertNotification(notification);
-            if (!result)
-                return BadRequest("Notification not inserted");
-            return Ok("Notification inserted");
+            return Ok(result);
+
         }
-        [HttpPost]
+        [HttpDelete("{id}")]
+        [ProducesDefaultResponseType(typeof(SaveResponse))]
         public IActionResult DeleteNotification(int id)
         {
             var result = _notificationAppService.DeleteNotification(id);
-            if (!result)
-                return BadRequest("Notification not deleted");
-            return Ok("Notification deleted");
+            return Ok(result);
+        }
+
+        [HttpPost("{id}")]
+        [ProducesDefaultResponseType(typeof(SaveResponse))]
+        public IActionResult UpdateNotification([FromBody]NotificationDTO notification,int id)
+        {
+            var result = _notificationAppService.UpdateNotification(notification);
+            return Ok(result);
         }
     }
 }

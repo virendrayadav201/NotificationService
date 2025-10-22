@@ -20,9 +20,33 @@ namespace NotificationService.Application.Services.Implementations
             _repository= repository;
             _mapper= mapper;
         }
-        public bool DeleteNotification(int id)
+        public SaveResponse DeleteNotification(int id)
         {
-            return _repository.DeleteNotification(id);
+            SaveResponse saveResponse = new SaveResponse();
+            try
+            {
+                var result = _repository.DeleteNotification(id);
+                if (result)
+                {
+                    AssignedSaveResponse(saveResponse, true, "Notification deleted successfully");
+                }
+                else
+                {
+                    AssignedSaveResponse(saveResponse,false,"Notification deletion failed!");
+                }
+
+            }
+            catch (Exception ex) {
+                AssignedSaveResponse(saveResponse, false, "Notification deletion failed!"+ ex.ToString());
+            }
+            return saveResponse;
+            
+        }
+
+        private static void AssignedSaveResponse(SaveResponse saveResponse,bool isError, string? message)
+        {
+            saveResponse.IsErrored = isError;
+            saveResponse.Message = message;
         }
 
         public NotificationDTO GetNotification(int id)
@@ -36,14 +60,50 @@ namespace NotificationService.Application.Services.Implementations
             return _mapper.Map<List<NotificationDTO>>(_repository.GetAllNotifications(userId));
         }
 
-        public bool InsertNotification(NotificationDTO notification)
+        public SaveResponse InsertNotification(NotificationDTO notification)
         {
-            return _repository.InsertNotification(_mapper.Map<Notification>(notification));
+            SaveResponse saveResponse = new SaveResponse();
+            try
+            {
+                var result = _repository.InsertNotification(_mapper.Map<Notification>(notification));
+                if (result)
+                {
+                    AssignedSaveResponse(saveResponse, true, "Notification inserted successfully");
+                }
+                else
+                {
+                    AssignedSaveResponse(saveResponse, false, "Notification insertion failed!");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                AssignedSaveResponse(saveResponse, false, "Notification insertion failed!" + ex.ToString());
+            }
+            return saveResponse;
         }
 
-        public bool UpdateNotification(NotificationDTO notification)
+        public SaveResponse UpdateNotification(NotificationDTO notification)
         {
-            return _repository.UpdateNotification(_mapper.Map<Notification>(notification));
+            SaveResponse saveResponse = new SaveResponse();
+            try
+            {
+                var result = _repository.UpdateNotification(_mapper.Map<Notification>(notification));
+                if (result)
+                {
+                    AssignedSaveResponse(saveResponse, true, "Notification updated successfully");
+                }
+                else
+                {
+                    AssignedSaveResponse(saveResponse, false, "Notification updation failed!");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                AssignedSaveResponse(saveResponse, false, "Notification updation failed!" + ex.ToString());
+            }
+            return saveResponse;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace NotificationService.Application.DTOs
 {
     public class NotificationDTO
     {
-        public int NotificationId { get; set; }
+        public int? NotificationId { get; set; }
 
         public int UserId { get; set; }
 
