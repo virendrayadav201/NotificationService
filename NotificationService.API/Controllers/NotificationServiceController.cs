@@ -45,8 +45,8 @@ namespace NotificationService.API.Controllers
         {
            var result = _notificationAppService.InsertNotification(notification);
             return Ok(result);
-
         }
+
         [HttpDelete("{id}")]
         [ProducesDefaultResponseType(typeof(SaveResponse))]
         public IActionResult DeleteNotification(int id)
@@ -55,9 +55,9 @@ namespace NotificationService.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("{id}")]
+        [HttpPut]
         [ProducesDefaultResponseType(typeof(SaveResponse))]
-        public IActionResult UpdateNotification([FromBody]NotificationDTO notification,int id)
+        public IActionResult UpdateNotification([FromBody]NotificationDTO notification)
         {
             var result = _notificationAppService.UpdateNotification(notification);
             return Ok(result);

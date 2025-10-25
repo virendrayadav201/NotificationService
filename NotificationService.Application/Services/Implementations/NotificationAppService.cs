@@ -45,7 +45,7 @@ namespace NotificationService.Application.Services.Implementations
 
         private static void AssignedSaveResponse(SaveResponse saveResponse,bool isError, string? message)
         {
-            saveResponse.IsErrored = isError;
+            saveResponse.IsError = isError;
             saveResponse.Message = message;
         }
 

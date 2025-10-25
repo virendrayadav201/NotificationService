@@ -8,7 +8,7 @@ namespace NotificationService.Application.DTOs
 {
     public class SaveResponse
     {
-        public bool IsErrored { get; set; }
+        public bool IsError { get; set; }
         public string? Message { get; set; }
 
     }
