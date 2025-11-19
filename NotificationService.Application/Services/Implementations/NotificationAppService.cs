@@ -37,7 +37,7 @@ namespace NotificationService.Application.Services.Implementations
 
             }
             catch (Exception ex) {
-                AssignedSaveResponse(saveResponse, false, "Notification deletion failed!"+ ex.ToString());
+                 AssignedSaveResponse(saveResponse, false, "Notification deletion failed!"+ ex.ToString());
             }
             return saveResponse;
             

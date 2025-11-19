@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NotificationService.Application.DTOs;
 using NotificationService.Application.Services.Abstractions;
@@ -15,6 +16,7 @@ namespace NotificationService.API.Controllers
             _notificationAppService= notificationAppService;   
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{userId}")]
         [ProducesDefaultResponseType(typeof(List<NotificationDTO>))]
         public IActionResult GetNotifications(int userId)
@@ -27,6 +29,7 @@ namespace NotificationService.API.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         [ProducesDefaultResponseType(typeof(NotificationDTO))]
         public IActionResult GetNotification(int id)
