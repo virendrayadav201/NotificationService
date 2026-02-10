@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using NotificationService.API.CircuitBreakers;
 using NotificationService.Infrastructure;
 using System.Text;
 
@@ -11,6 +12,7 @@ namespace NotificationService.API
         {
             var builder = WebApplication.CreateBuilder(args);
             ServiceRegistration.RegisterService(builder.Services, builder.Configuration);
+            CircuitBreakerRegistration.Register(builder.Services);
             // Add services to the container.
             builder.Services.AddCors(option =>
                 option.AddPolicy("AllowAll",policy =>
